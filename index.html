@@ -3,43 +3,243 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Travel Hub</title>
+<title>Travel Hub · 오사카 3박 4일</title>
 <style>
-  :root { --bg:#f7f5f0; --fg:#1f2328; --muted:#6b6f76; --card:#fff; --line:#e6e2d8; --accent:#0e7c66; }
+  :root { --bg:#f7f5f0; --fg:#1f2328; --muted:#6b6f76; --card:#fff; --line:#e6e2d8; --accent:#0e7c66; --accent-soft:#e3f2ee; --warn:#b4541a; }
   @media (prefers-color-scheme: dark) {
-    :root { --bg:#14171a; --fg:#e8e6e1; --muted:#9aa0a6; --card:#1c2024; --line:#2c3238; --accent:#3cc5a3; }
+    :root { --bg:#14171a; --fg:#e8e6e1; --muted:#9aa0a6; --card:#1c2024; --line:#2c3238; --accent:#3cc5a3; --accent-soft:#17312b; --warn:#f0a36b; }
   }
   * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
   body { margin:0; background:var(--bg); color:var(--fg);
          font-family:system-ui,-apple-system,"Segoe UI","Apple SD Gothic Neo","Malgun Gothic",sans-serif; line-height:1.6; }
-  .wrap { max-width:960px; margin:0 auto; padding:48px 16px; }
-  header h1 { font-size:2.2rem; margin:0 0 4px; letter-spacing:-0.02em; }
-  header p { color:var(--muted); margin:0 0 32px; }
-  .note { border:1px dashed var(--line); border-radius:10px; padding:10px 14px; color:var(--muted); font-size:.9rem; margin-bottom:28px; }
-  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:16px; }
-  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px; }
-  .card h2 { font-size:1.1rem; margin:0 0 6px; }
-  .card p { margin:0; color:var(--muted); font-size:.95rem; }
-  .tag { display:inline-block; font-size:.75rem; color:var(--accent); font-weight:600; margin-bottom:8px; }
+  .wrap { max-width:960px; margin:0 auto; padding:40px 16px 64px; }
+  header h1 { font-size:2.1rem; margin:0 0 4px; letter-spacing:-0.02em; }
+  header .sub { color:var(--muted); margin:0 0 20px; }
+  .facts { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin-bottom:12px; }
+  .fact { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 14px; }
+  .fact b { display:block; font-size:.75rem; color:var(--muted); font-weight:600; }
+  .fact span { font-weight:600; }
+  .note { font-size:.85rem; color:var(--muted); margin:0 0 24px; }
+  nav { position:sticky; top:0; z-index:5; background:var(--bg); padding:10px 0; margin-bottom:8px; border-bottom:1px solid var(--line);
+        display:flex; gap:6px; overflow-x:auto; }
+  nav a { flex:none; text-decoration:none; color:var(--fg); font-size:.9rem; padding:6px 12px; border:1px solid var(--line); border-radius:999px; background:var(--card); }
+  nav a:hover { border-color:var(--accent); color:var(--accent); }
+  section { padding-top:28px; }
+  h2 { font-size:1.3rem; margin:0 0 14px; display:flex; align-items:center; gap:8px; }
+  h2 .tag { font-size:.7rem; color:var(--accent); background:var(--accent-soft); padding:2px 8px; border-radius:6px; letter-spacing:.04em; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:14px; }
+  .day h3 { margin:0 0 2px; font-size:1.05rem; }
+  .day .theme { color:var(--muted); font-size:.9rem; margin:0 0 12px; }
+  .tl { list-style:none; margin:0; padding:0; }
+  .tl li { display:grid; grid-template-columns:52px 1fr; gap:8px; padding:6px 0; border-top:1px dashed var(--line); font-size:.95rem; }
+  .tl li:first-child { border-top:0; }
+  .tl time { color:var(--accent); font-weight:600; font-variant-numeric:tabular-nums; }
+  .tl small { display:block; color:var(--muted); }
+  dl { margin:0; display:grid; grid-template-columns:110px 1fr; gap:6px 12px; font-size:.95rem; }
+  dt { color:var(--muted); }
+  dd { margin:0; }
+  .food h3 { margin:0 0 4px; font-size:1rem; }
+  .food .where { font-size:.8rem; color:var(--accent); font-weight:600; }
+  .food p { margin:6px 0 0; color:var(--muted); font-size:.92rem; }
+  .check { list-style:none; margin:0; padding:0; columns:2 220px; column-gap:24px; }
+  .check li { break-inside:avoid; padding:4px 0; }
+  .check label { display:flex; gap:8px; align-items:flex-start; cursor:pointer; }
+  .check input { margin-top:5px; accent-color:var(--accent); }
+  .check input:checked + span { color:var(--muted); text-decoration:line-through; }
+  .progress { font-size:.85rem; color:var(--muted); margin:0 0 10px; }
+  table { width:100%; border-collapse:collapse; font-size:.95rem; }
+  th, td { text-align:left; padding:10px 8px; border-bottom:1px solid var(--line); }
+  th { color:var(--muted); font-weight:600; font-size:.85rem; }
+  td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  tfoot td { font-weight:700; border-bottom:0; }
+  .tips { margin:0; padding-left:20px; }
+  .tips li { margin:6px 0; }
+  .warn { color:var(--warn); font-weight:600; }
   footer { margin-top:48px; color:var(--muted); font-size:.85rem; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <h1>Travel Hub</h1>
-    <p>여행 계획, 일정, 체크리스트를 한곳에 모아두는 공간</p>
+    <h1>오사카 3박 4일</h1>
+    <p class="sub">먹고, 걷고, 하루는 교토까지. 간사이 첫 여행 플랜</p>
+    <div class="facts">
+      <div class="fact"><b>날짜</b><span>11.20(금) – 11.23(월)</span></div>
+      <div class="fact"><b>인원</b><span>2명</span></div>
+      <div class="fact"><b>숙소 위치</b><span>난바</span></div>
+      <div class="fact"><b>예상 경비 (1인)</b><span>약 105만 원</span></div>
+    </div>
+    <p class="note">예시 일정이에요. 가격과 영업시간은 출발 전에 다시 확인하세요.</p>
   </header>
-  <div class="note">임시 페이지예요. 곧 실제 내용으로 바뀝니다.</div>
-  <section class="grid">
-    <div class="card"><span class="tag">PLAN</span><h2>여행 일정</h2><p>날짜별 일정과 이동 동선을 정리해요.</p></div>
-    <div class="card"><span class="tag">STAY</span><h2>숙소</h2><p>예약한 숙소와 체크인 정보를 모아요.</p></div>
-    <div class="card"><span class="tag">FOOD</span><h2>맛집 리스트</h2><p>가보고 싶은 식당과 카페를 기록해요.</p></div>
-    <div class="card"><span class="tag">PACK</span><h2>준비물 체크리스트</h2><p>떠나기 전에 챙길 것들을 확인해요.</p></div>
-    <div class="card"><span class="tag">BUDGET</span><h2>예산</h2><p>항공, 숙박, 식비 등 지출을 관리해요.</p></div>
-    <div class="card"><span class="tag">MEMO</span><h2>메모</h2><p>여행 중 떠오른 생각과 사진 기록.</p></div>
+
+  <nav>
+    <a href="#plan">🗓️ 일정</a>
+    <a href="#stay">🏨 숙소·교통</a>
+    <a href="#food">🍜 맛집</a>
+    <a href="#pack">🎒 준비물</a>
+    <a href="#budget">💰 예산</a>
+    <a href="#memo">📒 메모</a>
+  </nav>
+
+  <section id="plan">
+    <h2>여행 일정 <span class="tag">PLAN</span></h2>
+    <div class="grid">
+      <div class="card day">
+        <h3>Day 1 · 11.20 금</h3>
+        <p class="theme">도착 & 미나미 산책</p>
+        <ul class="tl">
+          <li><time>09:00</time><div>인천 출발 → 간사이공항<small>비행 약 1시간 45분</small></div></li>
+          <li><time>12:00</time><div>난카이 라피트로 난바 이동<small>약 40분</small></div></li>
+          <li><time>13:30</time><div>숙소 짐 맡기고 점심</div></li>
+          <li><time>15:00</time><div>신사이바시스지 쇼핑 거리</div></li>
+          <li><time>18:00</time><div>도톤보리 · 글리코 간판</div></li>
+          <li><time>19:30</time><div>오코노미야키 저녁</div></li>
+        </ul>
+      </div>
+      <div class="card day">
+        <h3>Day 2 · 11.21 토</h3>
+        <p class="theme">오사카 클래식</p>
+        <ul class="tl">
+          <li><time>09:00</time><div>오사카성 공원 · 천수각</div></li>
+          <li><time>12:00</time><div>구로몬 시장 점심<small>해산물 꼬치, 과일</small></div></li>
+          <li><time>14:30</time><div>우메다 스카이빌딩 공중정원</div></li>
+          <li><time>17:00</time><div>신세카이 · 츠텐카쿠</div></li>
+          <li><time>18:30</time><div>쿠시카츠 저녁</div></li>
+        </ul>
+      </div>
+      <div class="card day">
+        <h3>Day 3 · 11.22 일</h3>
+        <p class="theme">교토 당일치기</p>
+        <ul class="tl">
+          <li><time>08:00</time><div>난바 → 교토 이동<small>약 1시간</small></div></li>
+          <li><time>09:00</time><div>후시미 이나리 신사 · 센본도리이</div></li>
+          <li><time>12:00</time><div>기요미즈데라 · 산넨자카</div></li>
+          <li><time>15:00</time><div>기온 거리 산책</div></li>
+          <li><time>18:00</time><div>오사카 복귀, 우메다 저녁</div></li>
+        </ul>
+      </div>
+      <div class="card day">
+        <h3>Day 4 · 11.23 월</h3>
+        <p class="theme">마지막 쇼핑 & 귀국</p>
+        <ul class="tl">
+          <li><time>09:30</time><div>체크아웃, 짐 보관</div></li>
+          <li><time>10:00</time><div>난바 · 덴덴타운 쇼핑</div></li>
+          <li><time>12:00</time><div>타코야키 점심</div></li>
+          <li><time>14:00</time><div>간사이공항 이동</div></li>
+          <li><time>17:00</time><div>간사이공항 출발 → 인천</div></li>
+        </ul>
+      </div>
+    </div>
   </section>
-  <footer>© 2026 Travel Hub</footer>
+
+  <section id="stay">
+    <h2>숙소 · 교통 <span class="tag">STAY</span></h2>
+    <div class="grid">
+      <div class="card">
+        <dl>
+          <dt>숙소</dt><dd>난바역 도보 5분 비즈니스 호텔 (예시)</dd>
+          <dt>체크인</dt><dd>11.20 15:00 이후</dd>
+          <dt>체크아웃</dt><dd>11.23 10:00 까지</dd>
+          <dt>객실</dt><dd>더블룸 · 3박</dd>
+          <dt>예약번호</dt><dd>예약 후 입력</dd>
+        </dl>
+      </div>
+      <div class="card">
+        <dl>
+          <dt>항공</dt><dd>인천 ⇄ 간사이 왕복</dd>
+          <dt>공항 이동</dt><dd>난카이 라피트 (간사이공항 ⇄ 난바)</dd>
+          <dt>시내</dt><dd>지하철 + IC카드 (ICOCA)</dd>
+          <dt>교토</dt><dd>JR 또는 게이한 전철</dd>
+          <dt>팁</dt><dd>트래블카드로 IC카드 충전하면 편해요</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section id="food">
+    <h2>맛집 리스트 <span class="tag">FOOD</span></h2>
+    <div class="grid">
+      <div class="card food"><span class="where">도톤보리</span><h3>🥞 오코노미야키</h3><p>철판에 바로 구워주는 오사카 대표 메뉴. 저녁 웨이팅 감안하기.</p></div>
+      <div class="card food"><span class="where">신세카이</span><h3>🍢 쿠시카츠</h3><p>꼬치 튀김. 소스는 한 번만 찍는 게 규칙!</p></div>
+      <div class="card food"><span class="where">도톤보리 · 난바</span><h3>🐙 타코야키</h3><p>길거리에서 바로 사 먹기. 뜨거우니 조심.</p></div>
+      <div class="card food"><span class="where">구로몬 시장</span><h3>🦀 해산물 꼬치</h3><p>성게, 가리비, 참치 등. 오전 방문이 여유로워요.</p></div>
+      <div class="card food"><span class="where">우메다</span><h3>🍜 라멘</h3><p>교토 다녀온 날 저녁, 역 근처에서 간단히.</p></div>
+      <div class="card food"><span class="where">난바</span><h3>🍰 치즈케이크</h3><p>갓 구운 수플레 치즈케이크. 기념 간식으로.</p></div>
+    </div>
+  </section>
+
+  <section id="pack">
+    <h2>준비물 체크리스트 <span class="tag">PACK</span></h2>
+    <div class="card">
+      <p class="progress" id="progress">0 / 0 완료</p>
+      <ul class="check" id="checklist">
+        <li><label><input type="checkbox"><span>여권 (유효기간 6개월 이상)</span></label></li>
+        <li><label><input type="checkbox"><span>항공권 · 숙소 예약 확인서</span></label></li>
+        <li><label><input type="checkbox"><span>Visit Japan Web 등록</span></label></li>
+        <li><label><input type="checkbox"><span>엔화 현금 + 트래블카드</span></label></li>
+        <li><label><input type="checkbox"><span>eSIM 또는 포켓와이파이</span></label></li>
+        <li><label><input type="checkbox"><span>110V 돼지코 어댑터</span></label></li>
+        <li><label><input type="checkbox"><span>보조배터리 (기내 반입)</span></label></li>
+        <li><label><input type="checkbox"><span>편한 운동화</span></label></li>
+        <li><label><input type="checkbox"><span>얇은 패딩 / 가디건</span></label></li>
+        <li><label><input type="checkbox"><span>상비약</span></label></li>
+        <li><label><input type="checkbox"><span>여행자 보험</span></label></li>
+        <li><label><input type="checkbox"><span>동전 지갑</span></label></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="budget">
+    <h2>예산 (1인 기준) <span class="tag">BUDGET</span></h2>
+    <div class="card">
+      <table>
+        <thead><tr><th>항목</th><th>내용</th><th class="num">금액</th></tr></thead>
+        <tbody>
+          <tr><td>✈️ 항공</td><td>인천 ⇄ 간사이 왕복</td><td class="num">300,000원</td></tr>
+          <tr><td>🏨 숙박</td><td>3박 (2인 1실, 1인 부담)</td><td class="num">300,000원</td></tr>
+          <tr><td>🚃 교통</td><td>공항철도, 지하철, 교토 왕복</td><td class="num">80,000원</td></tr>
+          <tr><td>🍜 식비</td><td>하루 약 6만 원 × 4일</td><td class="num">240,000원</td></tr>
+          <tr><td>🎫 입장료</td><td>오사카성, 공중정원 등</td><td class="num">30,000원</td></tr>
+          <tr><td>🛍️ 쇼핑 · 기타</td><td>기념품, 간식</td><td class="num">100,000원</td></tr>
+        </tbody>
+        <tfoot><tr><td colspan="2">합계</td><td class="num">1,050,000원</td></tr></tfoot>
+      </table>
+    </div>
+  </section>
+
+  <section id="memo">
+    <h2>메모 <span class="tag">MEMO</span></h2>
+    <div class="card">
+      <ul class="tips">
+        <li>오사카 에스컬레이터는 <b>오른쪽</b>에 서요. (도쿄와 반대)</li>
+        <li>11월 말은 교토 단풍 시즌이라 사람이 많아요. 후시미 이나리는 <b>아침 일찍</b> 가기.</li>
+        <li>편의점 ATM에서 트래블카드로 엔화 인출 가능해요.</li>
+        <li>면세는 여권 지참 필수, 5,000엔 이상 구매 시 확인.</li>
+        <li class="warn">귀국 당일은 공항에 출발 2시간 전 도착하기.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>© 2026 Travel Hub · 예시 여행 플랜</footer>
 </div>
+<script>
+  (function () {
+    var KEY = 'travelhub-osaka-pack';
+    var boxes = document.querySelectorAll('#checklist input');
+    var out = document.getElementById('progress');
+    var saved = [];
+    try { saved = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) {}
+    boxes.forEach(function (b, i) { b.checked = !!saved[i]; b.addEventListener('change', update); });
+    function update() {
+      var state = Array.prototype.map.call(boxes, function (b) { return b.checked; });
+      var done = state.filter(Boolean).length;
+      out.textContent = done + ' / ' + boxes.length + ' 완료';
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+    }
+    update();
+  })();
+</script>
 </body>
 </html>
