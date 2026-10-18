@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Travel Hub</title>
+<style>
+  :root { --bg:#f7f5f0; --fg:#1f2328; --muted:#6b6f76; --card:#fff; --line:#e6e2d8; --accent:#0e7c66; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#14171a; --fg:#e8e6e1; --muted:#9aa0a6; --card:#1c2024; --line:#2c3238; --accent:#3cc5a3; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg);
+         font-family:system-ui,-apple-system,"Segoe UI","Apple SD Gothic Neo","Malgun Gothic",sans-serif; line-height:1.6; }
+  .wrap { max-width:960px; margin:0 auto; padding:48px 16px; }
+  header h1 { font-size:2.2rem; margin:0 0 4px; letter-spacing:-0.02em; }
+  header p { color:var(--muted); margin:0 0 32px; }
+  .note { border:1px dashed var(--line); border-radius:10px; padding:10px 14px; color:var(--muted); font-size:.9rem; margin-bottom:28px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:16px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px; }
+  .card h2 { font-size:1.1rem; margin:0 0 6px; }
+  .card p { margin:0; color:var(--muted); font-size:.95rem; }
+  .tag { display:inline-block; font-size:.75rem; color:var(--accent); font-weight:600; margin-bottom:8px; }
+  footer { margin-top:48px; color:var(--muted); font-size:.85rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Travel Hub</h1>
+    <p>여행 계획, 일정, 체크리스트를 한곳에 모아두는 공간</p>
+  </header>
+  <div class="note">임시 페이지예요. 곧 실제 내용으로 바뀝니다.</div>
+  <section class="grid">
+    <div class="card"><span class="tag">PLAN</span><h2>여행 일정</h2><p>날짜별 일정과 이동 동선을 정리해요.</p></div>
+    <div class="card"><span class="tag">STAY</span><h2>숙소</h2><p>예약한 숙소와 체크인 정보를 모아요.</p></div>
+    <div class="card"><span class="tag">FOOD</span><h2>맛집 리스트</h2><p>가보고 싶은 식당과 카페를 기록해요.</p></div>
+    <div class="card"><span class="tag">PACK</span><h2>준비물 체크리스트</h2><p>떠나기 전에 챙길 것들을 확인해요.</p></div>
+    <div class="card"><span class="tag">BUDGET</span><h2>예산</h2><p>항공, 숙박, 식비 등 지출을 관리해요.</p></div>
+    <div class="card"><span class="tag">MEMO</span><h2>메모</h2><p>여행 중 떠오른 생각과 사진 기록.</p></div>
+  </section>
+  <footer>© 2026 Travel Hub</footer>
+</div>
+</body>
+</html>
